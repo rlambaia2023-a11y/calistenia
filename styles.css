@@ -21,29 +21,57 @@ button.secundario{background:#2a3342}
 button:disabled{opacity:.5}
 .player{margin-top:20px;background:#1a202b;border:2px solid #ff6b1a;border-radius:16px;padding:16px}
 .escondido{display:none}
-.palco{text-align:center;background:#0f1115;border-radius:12px;padding:10px}
-#boneco{width:220px;height:260px}
-#boneco circle,#boneco line{stroke:#ffb066;stroke-width:5;stroke-linecap:round;fill:none}
-#boneco circle{fill:#ffb066;stroke:#ffb066}
-#chao{stroke:#333 !important}
+.palco{text-align:center;background:radial-gradient(circle at 50% 20%,#232c3d,#0f1115 70%);border-radius:12px;padding:14px;overflow:hidden}
+#boneco{width:230px;height:270px;cursor:pointer}
 #bonecoLegenda{color:#c9d1d9;font-size:13px}
-#bonecoFig{transform-box:fill-box;transform-origin:center}
-.anim-agachamento #bonecoFig{animation:agacha 1.6s ease-in-out infinite}
-@keyframes agacha{0%,100%{transform:translateY(0)}50%{transform:translateY(18px) scaleY(.92)}}
-.anim-flexao #bonecoFig{animation:flexao 1.6s ease-in-out infinite}
-@keyframes flexao{0%,100%{transform:rotate(90deg) translateY(0)}50%{transform:rotate(90deg) translateY(14px)}}
-.anim-barra #bonecoFig{animation:barra 1.8s ease-in-out infinite}
-@keyframes barra{0%,100%{transform:translateY(14px)}50%{transform:translateY(-8px)}}
-.anim-prancha #bonecoFig{animation:prancha 2s ease-in-out infinite}
-@keyframes prancha{0%,100%{transform:rotate(90deg)}50%{transform:rotate(90deg) translateY(2px)}}
-.anim-afundo #bonecoFig{animation:afundo 1.8s ease-in-out infinite}
-@keyframes afundo{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
-.anim-parada-mao #bonecoFig{animation:mao 2s ease-in-out infinite}
+#bonecoFig,#bracoFrente,#bracoTras,#pernaFrente,#pernaTras,#tronco,#cabeca{transform-box:fill-box}
+#bonecoFig{transform-origin:center}
+#bracoFrente,#bracoTras{transform-origin:50% 8%}
+#pernaFrente,#pernaTras{transform-origin:50% 5%}
+#tronco{transform-origin:center}
+.membro.tras{opacity:.55}
+.palco-barra{height:8px;background:#ff7a2a;border-radius:4px;margin:0 20px 4px}
+.anim-agachamento #bonecoFig{animation:agacha calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes agacha{0%,100%{transform:translateY(0)}50%{transform:translateY(22px) scaleY(.94)}}
+.anim-agachamento #bracoFrente{animation:agachaBraco calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes agachaBraco{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-75deg)}}
+.anim-agachamento #pernaFrente{animation:agachaPerna calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes agachaPerna{0%,100%{transform:rotate(0deg)}50%{transform:rotate(28deg)}}
+.anim-flexao #bonecoFig{animation:flexao calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes flexao{0%,100%{transform:rotate(90deg) translateX(0)}50%{transform:rotate(90deg) translateX(18px)}}
+.anim-barra #bonecoFig{animation:barra calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes barra{0%,100%{transform:translateY(16px)}50%{transform:translateY(-10px)}}
+.anim-barra #bracoFrente,.anim-barra #bracoTras{animation:barraBraco calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes barraBraco{0%,100%{transform:rotate(-160deg)}50%{transform:rotate(-175deg)}}
+.anim-prancha #bonecoFig{animation:prancha calc(2.2s / var(--vel,1)) ease-in-out infinite}
+@keyframes prancha{0%,100%{transform:rotate(90deg)}50%{transform:rotate(90deg) translateX(3px)}}
+.anim-afundo #bonecoFig{animation:afundo calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes afundo{0%,100%{transform:translateY(0)}50%{transform:translateY(18px)}}
+.anim-afundo #pernaFrente{animation:afundoFrente calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes afundoFrente{0%,100%{transform:rotate(0deg)}50%{transform:rotate(35deg)}}
+.anim-afundo #pernaTras{animation:afundoTras calc(1.8s / var(--vel,1)) ease-in-out infinite}
+@keyframes afundoTras{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-35deg)}}
+.anim-parada-mao #bonecoFig{animation:mao calc(2.2s / var(--vel,1)) ease-in-out infinite}
 @keyframes mao{0%,100%{transform:rotate(180deg)}50%{transform:rotate(180deg) translateY(4px)}}
-.anim-salto #bonecoFig{animation:salto 1.4s ease-in-out infinite}
-@keyframes salto{0%,100%{transform:translateY(0)}40%{transform:translateY(-18px)}60%{transform:translateY(0)}}
-.anim-padrao #bonecoFig{animation:padrao 1.8s ease-in-out infinite}
-@keyframes padrao{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.anim-salto #bonecoFig{animation:salto calc(1.4s / var(--vel,1)) ease-in-out infinite}
+@keyframes salto{0%,100%{transform:translateY(0)}40%{transform:translateY(-22px)}60%{transform:translateY(0)}}
+.anim-salto #bracoFrente{animation:saltoBraco calc(1.4s / var(--vel,1)) ease-in-out infinite}
+@keyframes saltoBraco{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-150deg)}}
+.anim-padrao #bonecoFig{animation:padrao calc(2.4s / var(--vel,1)) ease-in-out infinite}
+@keyframes padrao{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-4px) rotate(-2deg)}75%{transform:translateY(-4px) rotate(2deg)}}
+.anim-padrao #bracoFrente{animation:circuloBraco calc(2.4s / var(--vel,1)) linear infinite}
+@keyframes circuloBraco{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.anim-padrao #pernaFrente{animation:balancoPerna calc(2.4s / var(--vel,1)) ease-in-out infinite}
+@keyframes balancoPerna{0%,100%{transform:rotate(0deg)}50%{transform:rotate(28deg)}}
+.palco.pausado #bonecoFig,.palco.pausado #bracoFrente,.palco.pausado #bracoTras,.palco.pausado #pernaFrente,.palco.pausado #pernaTras{animation-play-state:paused}
+.palco.vista-lado #boneco{transform:scaleX(.68)}
+.palco.vista-lado .membro.tras{opacity:.18}
+.boneco-controles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:end;margin-top:8px}
+.boneco-controles label{margin:0;text-align:left}
+.boneco-controles select{width:auto}
+.scrub{display:block;max-width:420px;margin:14px auto 6px}
+.scrub input{width:100%;accent-color:#ff7a2a}
+#faseAtual{color:#c9d1d9;font-size:13px}
 .player-controles{margin-top:14px;display:grid;gap:10px}
 .botoes{display:flex;gap:10px;flex-wrap:wrap}
 .mapa{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}

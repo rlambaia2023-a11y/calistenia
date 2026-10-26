@@ -127,4 +127,42 @@ document.getElementById('filtroNivel').onchange=renderTreinos; document.getEleme
 document.getElementById('buscaEx').oninput=()=>renderExercicios(document.querySelector('#filtrosCat button.ativo').dataset.cat);
 document.querySelectorAll('#filtrosCat button').forEach(b=>b.onclick=()=>{ document.querySelectorAll('#filtrosCat button').forEach(x=>x.classList.remove('ativo')); b.classList.add('ativo'); renderExercicios(b.dataset.cat); });
 document.getElementById('limparProgresso').onclick=()=>{ if(confirm('Limpar todo o progresso?')){ progresso={treinos:0,series:0,datas:[],historico:[],musculos:{}}; salvar(); } };
+// Humanoide interativo: play/pausa, velocidade, vista e controle do movimento
+const palcoEl = document.querySelector('.palco');
+function animados(){ return palcoEl.querySelectorAll('#bonecoFig, #bracoFrente, #bracoTras, #pernaFrente, #pernaTras'); }
+function setPausado(p){
+  palcoEl.classList.toggle('pausado', p);
+  document.getElementById('btnPlayPausa').textContent = p ? '▶ Continuar' : '⏸ Pausar';
+}
+document.getElementById('btnPlayPausa').onclick = () => setPausado(!palcoEl.classList.contains('pausado'));
+document.getElementById('boneco').onclick = () => setPausado(!palcoEl.classList.contains('pausado'));
+document.getElementById('btnVista').onclick = (e) => {
+  const lado = palcoEl.classList.toggle('vista-lado');
+  e.target.textContent = lado ? 'Vista: lado' : 'Vista: frente';
+};
+document.getElementById('selVelocidade').onchange = (e) => palcoEl.style.setProperty('--vel', e.target.value);
+function scrubPara(v){
+  document.getElementById('scrubMovimento').value = v;
+  setPausado(true);
+  animados().forEach(el => {
+    const dur = parseFloat(getComputedStyle(el).animationDuration) || 1.8;
+    el.style.animationDelay = (-(v/100) * dur) + 's';
+  });
+  document.getElementById('faseAtual').textContent = v==0 ? 'Fase: início do movimento.' : v==100 ? 'Fase: fim do movimento.' : 'Fase: meio do movimento — arraste para explorar.';
+}
+document.getElementById('scrubMovimento').oninput = (e) => scrubPara(Number(e.target.value));
+document.getElementById('btnFaseInicio').onclick = () => scrubPara(0);
+document.getElementById('btnFaseMeio').onclick = () => scrubPara(50);
+document.getElementById('btnFaseFim').onclick = () => scrubPara(100);
+// Ao trocar de exercício, volta a tocar do início e mostra a barra só na barra fixa
+const mostrarPlayerOriginal = mostrarPlayer;
+mostrarPlayer = function(titulo, sub, e){
+  mostrarPlayerOriginal(titulo, sub, e);
+  palcoEl.classList.remove('vista-lado');
+  document.getElementById('btnVista').textContent = 'Vista: frente';
+  document.getElementById('barraTopo').style.display = (e.anim === 'barra') ? 'block' : 'none';
+  document.getElementById('scrubMovimento').value = 0;
+  animados().forEach(el => el.style.animationDelay = '0s');
+  setPausado(false);
+};
 renderTreinos(); renderExercicios(); renderSkills(); atualizarProgresso();
