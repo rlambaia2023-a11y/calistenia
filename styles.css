@@ -24,6 +24,7 @@ button:disabled{opacity:.5}
 .palco{text-align:center;background:radial-gradient(circle at 50% 20%,#232c3d,#0f1115 70%);border-radius:12px;padding:14px;overflow:hidden}
 #boneco{width:230px;height:270px;cursor:pointer}
 #bonecoLegenda{color:#c9d1d9;font-size:13px}
+#fotoReal{width:100%;max-width:420px;border-radius:12px;margin:8px auto;display:block}
 #bonecoFig,#bracoFrente,#bracoTras,#pernaFrente,#pernaTras,#tronco,#cabeca{transform-box:fill-box}
 #bonecoFig{transform-origin:center}
 #bracoFrente,#bracoTras{transform-origin:50% 8%}

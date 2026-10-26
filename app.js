@@ -154,10 +154,33 @@ document.getElementById('scrubMovimento').oninput = (e) => scrubPara(Number(e.ta
 document.getElementById('btnFaseInicio').onclick = () => scrubPara(0);
 document.getElementById('btnFaseMeio').onclick = () => scrubPara(50);
 document.getElementById('btnFaseFim').onclick = () => scrubPara(100);
+// Foto real (IA) por exercício — a mais próxima de pessoa real é a de corpo inteiro em pé (padrão)
+function fotoPara(e){
+  if(!e) return FOTOS.padrao;
+  if(e.id && e.id.indexOf('flexao') === 0) return FOTOS.flexao;
+  if(e.id === 'agachamento') return FOTOS.agachamento;
+  if(e.id && e.id.indexOf('barra') === 0) return FOTOS.barra;
+  return FOTOS.padrao;
+}
+let mostrandoFoto = false;
+function setFoto(mostrar, e){
+  mostrandoFoto = mostrar;
+  const img = document.getElementById('fotoReal');
+  const svg = document.getElementById('boneco');
+  if(e) img.src = fotoPara(e);
+  img.classList.toggle('escondido', !mostrar);
+  svg.style.display = mostrar ? 'none' : 'block';
+  document.getElementById('btnFotoReal').textContent = mostrar ? '🤖 Humanoide animado' : '📷 Foto real';
+}
+document.getElementById('btnFotoReal').onclick = () => {
+  // usa o exercício atual quando houver treino; senão, mantém a foto já carregada
+  setFoto(!mostrandoFoto, null);
+};
 // Ao trocar de exercício, volta a tocar do início e mostra a barra só na barra fixa
 const mostrarPlayerOriginal = mostrarPlayer;
 mostrarPlayer = function(titulo, sub, e){
   mostrarPlayerOriginal(titulo, sub, e);
+  setFoto(false, e);
   palcoEl.classList.remove('vista-lado');
   document.getElementById('btnVista').textContent = 'Vista: frente';
   document.getElementById('barraTopo').style.display = (e.anim === 'barra') ? 'block' : 'none';
