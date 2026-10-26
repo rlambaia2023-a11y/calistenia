@@ -1,0 +1,54 @@
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,Arial,sans-serif;background:#0f1115;color:#f2f2f2}
+.topo{display:flex;justify-content:space-between;align-items:center;padding:18px;background:#151a23;border-bottom:3px solid #ff6b1a}
+.topo h1{margin:0}.topo p{margin:4px 0 0;color:#c9d1d9}
+.streak{background:#ff6b1a;padding:10px 14px;border-radius:20px;font-weight:700;white-space:nowrap}
+.abas{display:flex;gap:8px;padding:12px;overflow-x:auto;background:#151a23}
+.abas button,.filtros button{border:1px solid #333;background:#1f2530;color:#fff;padding:10px 14px;border-radius:20px;cursor:pointer;white-space:nowrap}
+.abas button.ativo,.filtros button.ativo{background:#ff6b1a;border-color:#ff6b1a}
+main{padding:16px;max-width:900px;margin:0 auto}
+.aba{display:none}.aba.ativa{display:block}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px}
+.card{background:#1a202b;border:1px solid #2a3342;border-radius:16px;padding:16px}
+.card.destaque{border-color:#ff6b1a}
+.card h2,.card h3{margin-top:0}
+.numero{font-size:32px;font-weight:800;margin:8px 0}
+label{display:block;margin:10px 0;color:#c9d1d9} select,input[type=search]{width:100%;padding:10px;margin-top:6px;border-radius:10px;border:1px solid #333;background:#0f1115;color:#fff}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{display:inline-block;background:#2a3342;padding:4px 10px;border-radius:20px;font-size:12px;margin:2px}
+.tag.nivel{background:#ff6b1a}
+button{border:0;background:#ff6b1a;color:#fff;padding:12px 16px;border-radius:12px;cursor:pointer;font-weight:700}
+button.secundario{background:#2a3342}
+button:disabled{opacity:.5}
+.player{margin-top:20px;background:#1a202b;border:2px solid #ff6b1a;border-radius:16px;padding:16px}
+.escondido{display:none}
+.palco{text-align:center;background:#0f1115;border-radius:12px;padding:10px}
+#boneco{width:220px;height:260px}
+#boneco circle,#boneco line{stroke:#ffb066;stroke-width:5;stroke-linecap:round;fill:none}
+#boneco circle{fill:#ffb066;stroke:#ffb066}
+#chao{stroke:#333 !important}
+#bonecoLegenda{color:#c9d1d9;font-size:13px}
+#bonecoFig{transform-box:fill-box;transform-origin:center}
+.anim-agachamento #bonecoFig{animation:agacha 1.6s ease-in-out infinite}
+@keyframes agacha{0%,100%{transform:translateY(0)}50%{transform:translateY(18px) scaleY(.92)}}
+.anim-flexao #bonecoFig{animation:flexao 1.6s ease-in-out infinite}
+@keyframes flexao{0%,100%{transform:rotate(90deg) translateY(0)}50%{transform:rotate(90deg) translateY(14px)}}
+.anim-barra #bonecoFig{animation:barra 1.8s ease-in-out infinite}
+@keyframes barra{0%,100%{transform:translateY(14px)}50%{transform:translateY(-8px)}}
+.anim-prancha #bonecoFig{animation:prancha 2s ease-in-out infinite}
+@keyframes prancha{0%,100%{transform:rotate(90deg)}50%{transform:rotate(90deg) translateY(2px)}}
+.anim-afundo #bonecoFig{animation:afundo 1.8s ease-in-out infinite}
+@keyframes afundo{0%,100%{transform:translateY(0)}50%{transform:translateY(16px)}}
+.anim-parada-mao #bonecoFig{animation:mao 2s ease-in-out infinite}
+@keyframes mao{0%,100%{transform:rotate(180deg)}50%{transform:rotate(180deg) translateY(4px)}}
+.anim-salto #bonecoFig{animation:salto 1.4s ease-in-out infinite}
+@keyframes salto{0%,100%{transform:translateY(0)}40%{transform:translateY(-18px)}60%{transform:translateY(0)}}
+.anim-padrao #bonecoFig{animation:padrao 1.8s ease-in-out infinite}
+@keyframes padrao{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.player-controles{margin-top:14px;display:grid;gap:10px}
+.botoes{display:flex;gap:10px;flex-wrap:wrap}
+.mapa{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mapa span{padding:8px 12px;border-radius:10px;background:#2a3342}
+.mapa span.forte{background:#ff6b1a}
+.mapa span.medio{background:#7a3a12}
+footer{padding:20px;text-align:center;color:#c9d1d9}
+.intro{color:#c9d1d9}

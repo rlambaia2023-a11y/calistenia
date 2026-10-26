@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calistenia — Treine com o corpo</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topo">
+  <div>
+    <h1>💪 Calistenia</h1>
+    <p>Treine com o peso do corpo. Sem academia, sem desculpa.</p>
+  </div>
+  <div class="streak" id="streakBox">🔥 0 dias</div>
+</header>
+
+<nav class="abas">
+  <button data-aba="treinos" class="ativo">Treinos</button>
+  <button data-aba="biblioteca">Exercícios</button>
+  <button data-aba="skills">Skills</button>
+  <button data-aba="progresso">Progresso</button>
+</nav>
+
+<main>
+  <!-- TREINOS -->
+  <section id="aba-treinos" class="aba ativa">
+    <div class="card destaque">
+      <h2>Comece por aqui</h2>
+      <p>Escolha seu nível e o app monta a sessão. O boneco mostra o movimento, o timer marca o descanso e tudo fica salvo no seu progresso.</p>
+      <label>Nível
+        <select id="filtroNivel">
+          <option value="todos">Todos</option>
+          <option value="Iniciante">Iniciante</option>
+          <option value="Intermediário">Intermediário</option>
+          <option value="Avançado">Avançado</option>
+        </select>
+      </label>
+      <label>Onde você vai treinar?
+        <select id="filtroLocal">
+          <option value="todos">Qualquer lugar</option>
+          <option value="Nenhum">Só chão (sem equipamento)</option>
+          <option value="Barra">Com barra</option>
+          <option value="Paralelas">Com paralelas</option>
+        </select>
+      </label>
+    </div>
+    <div id="listaTreinos" class="grade"></div>
+  </section>
+
+  <!-- BIBLIOTECA -->
+  <section id="aba-biblioteca" class="aba">
+    <input id="buscaEx" type="search" placeholder="Buscar: flexão, barra, prancha, agachamento...">
+    <div class="filtros" id="filtrosCat">
+      <button data-cat="todos" class="ativo">Todos</button>
+      <button data-cat="Empurrar">Empurrar</button>
+      <button data-cat="Puxar">Puxar</button>
+      <button data-cat="Pernas">Pernas</button>
+      <button data-cat="Core">Core</button>
+      <button data-cat="Mobilidade">Mobilidade</button>
+    </div>
+    <div id="listaExercicios" class="grade"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="aba-skills" class="aba">
+    <p class="intro">Skill não se aprende de uma vez. Cada uma tem uma escada: você sobe um degrau quando domina o anterior.</p>
+    <div id="listaSkills" class="grade"></div>
+  </section>
+
+  <!-- PROGRESSO -->
+  <section id="aba-progresso" class="aba">
+    <div class="grade">
+      <div class="card"><h3>Treinos concluídos</h3><p class="numero" id="statTreinos">0</p></div>
+      <div class="card"><h3>Séries concluídas</h3><p class="numero" id="statSeries">0</p></div>
+      <div class="card"><h3>Sequência</h3><p class="numero" id="statStreak">0 dias</p></div>
+      <div class="card"><h3>Último treino</h3><p id="statUltimo">Nenhum ainda</p></div>
+    </div>
+    <div class="card">
+      <h3>Mapa muscular</h3>
+      <p>Quanto mais escuro, mais você treinou aquele grupo nos últimos treinos.</p>
+      <div id="mapaMuscular" class="mapa"></div>
+    </div>
+    <div class="card">
+      <h3>Histórico</h3>
+      <ul id="historico"></ul>
+      <button id="limparProgresso" class="secundario">Limpar meu progresso</button>
+    </div>
+  </section>
+
+  <!-- PLAYER / DETALHE -->
+  <section id="player" class="player escondido">
+    <button id="fecharPlayer" class="secundario">← Voltar</button>
+    <h2 id="playerTitulo"></h2>
+    <p id="playerSub"></p>
+
+    <div class="palco">
+      <svg id="boneco" viewBox="0 0 100 120" aria-label="Boneco animado demonstrando o exercício">
+        <g id="bonecoFig">
+          <circle id="cabeca" cx="50" cy="16" r="11" />
+          <line x1="50" y1="27" x2="50" y2="68" />
+          <g id="bracos">
+            <line x1="50" y1="36" x2="28" y2="52" />
+            <line x1="50" y1="36" x2="72" y2="52" />
+          </g>
+          <g id="pernas">
+            <line x1="50" y1="68" x2="32" y2="98" />
+            <line x1="50" y1="68" x2="68" y2="98" />
+          </g>
+        </g>
+        <line id="chao" x1="10" y1="108" x2="90" y2="108" />
+      </svg>
+      <p id="bonecoLegenda">Boneco animado próprio — demonstração do movimento, sem copiar vídeo de terceiros.</p>
+    </div>
+
+    <div id="playerPassos"></div>
+    <div id="playerErros"></div>
+
+    <div class="player-controles">
+      <div><strong>Série <span id="serieAtual">1</span> de <span id="serieTotal">3</span></strong></div>
+      <div class="botoes">
+        <button id="btnSerie">✓ Concluir série</button>
+        <button id="btnDescanso" class="secundario">⏱ Descanso 60s</button>
+      </div>
+      <p id="timer">Descanso: --</p>
+      <button id="btnProximo" class="secundario">Próximo exercício →</button>
+      <button id="btnConcluirTreino">🏁 Concluir treino</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Feito como Engenheiro de IA Aplicada, com código próprio, em pt-BR. Vídeos reais entram na v2 com gravações próprias — o boneco animado já cobre a demonstração na v1.</p>
+  <p><small>Aviso: pare se sentir dor aguda. Isto não substitui orientação profissional de saúde.</small></p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
