@@ -163,7 +163,9 @@ function fotoPara(e){
   return FOTOS.padrao;
 }
 let mostrandoFoto = false;
+let exercicioAtual = null;
 function setFoto(mostrar, e){
+  if(e) exercicioAtual = e;
   mostrandoFoto = mostrar;
   const img = document.getElementById('fotoReal');
   const svg = document.getElementById('boneco');
@@ -174,12 +176,25 @@ function setFoto(mostrar, e){
 }
 document.getElementById('btnFotoReal').onclick = () => {
   // usa o exercício atual quando houver treino; senão, mantém a foto já carregada
-  setFoto(!mostrandoFoto, null);
+  setFoto(!mostrandoFoto, exercicioAtual);
+  document.getElementById('selModelo').value = mostrandoFoto ? 'auto' : 'humanoide';
+};
+document.getElementById('selModelo').onchange = (e) => {
+  const v = e.target.value;
+  if(v === 'humanoide' || v === 'auto'){ setFoto(false, exercicioAtual); return; }
+  // modelo escolhido vale para qualquer exercício, até trocar de exercício
+  const img = document.getElementById('fotoReal');
+  img.src = FOTOS[v];
+  mostrandoFoto = true;
+  img.classList.remove('escondido');
+  document.getElementById('boneco').style.display = 'none';
+  document.getElementById('btnFotoReal').textContent = '🤖 Humanoide animado';
 };
 // Ao trocar de exercício, volta a tocar do início e mostra a barra só na barra fixa
 const mostrarPlayerOriginal = mostrarPlayer;
 mostrarPlayer = function(titulo, sub, e){
   mostrarPlayerOriginal(titulo, sub, e);
+  document.getElementById('selModelo').value = 'auto';
   setFoto(false, e);
   palcoEl.classList.remove('vista-lado');
   document.getElementById('btnVista').textContent = 'Vista: frente';
